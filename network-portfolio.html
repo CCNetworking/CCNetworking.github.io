@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jon's Network Engineering Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@300;400;600;700&display=swap');
+        
+        :root {
+            --primary: #0A84FF;
+            --primary-dark: #0051D5;
+            --secondary: #5E5CE6;
+            --bg-dark: #0A0E27;
+            --bg-card: #141B3D;
+            --bg-card-hover: #1A2351;
+            --text-primary: #E8EAED;
+            --text-secondary: #98A2B3;
+            --text-tertiary: #6B7A99;
+            --accent: #00D9FF;
+            --success: #34C759;
+            --border: #2A3654;
+            --shadow: rgba(10, 132, 255, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'IBM Plex Sans', -apple-system, system-ui, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Background Effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(10, 132, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(94, 92, 230, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Grid Pattern */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            z-index: 100;
+            margin-bottom: 4rem;
+        }
+        
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        nav h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0 6rem;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+        }
+        
+        .hero .tagline {
+            font-size: 1rem;
+            color: var(--text-tertiary);
+            font-style: italic;
+            margin-bottom: 3rem;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .stat-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 8px 24px var(--shadow);
+            transform: translateY(-4px);
+        }
+        
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Resume Button */
+        .resume-button {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        
+        .resume-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+        
+        .resume-button svg {
+            transition: transform 0.3s;
+        }
+        
+        .resume-button:hover svg {
+            transform: translateY(2px);
+        }
+        
+        /* Section Styling */
+        section {
+            padding: 4rem 0;
+            scroll-margin-top: 80px;
+        }
+        
+        h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+        
+        h4 {
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .section-intro {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            max-width: 900px;
+        }
+        
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s;
+        }
+        
+        .card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 3rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 3px solid var(--bg-dark);
+            box-shadow: 0 0 0 3px var(--primary);
+        }
+        
+        .timeline-date {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        
+        .timeline-content h4 {
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-content ul {
+            color: var(--text-secondary);
+            margin-left: 1.5rem;
+        }
+        
+        .timeline-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Topology Diagram */
+        .topology {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            overflow-x: auto;
+        }
+        
+        .topology svg {
+            width: 100%;
+            height: auto;
+            min-height: 400px;
+        }
+        
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .skill-category {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        
+        .skill-category h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .skill-category ul {
+            list-style: none;
+        }
+        
+        .skill-category li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .skill-category li:last-child {
+            border-bottom: none;
+        }
+        
+        .skill-category li::before {
+            content: '▹';
+            color: var(--primary);
+            margin-right: 0.5rem;
+            font-weight: bold;
+        }
+        
+        /* Code Blocks */
+        .code-block {
+            background: #0D1117;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        
+        .code-block code {
+            font-family: 'JetBrains Mono', monospace;
+            color: #C9D1D9;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        /* Tags */
+        .tag {
+            display: inline-block;
+            background: rgba(10, 132, 255, 0.2);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid var(--primary);
+        }
+        
+        .tag.critical {
+            background: rgba(255, 59, 48, 0.2);
+            color: #FF3B30;
+            border-color: #FF3B30;
+        }
+        
+        .tag.success {
+            background: rgba(52, 199, 89, 0.2);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        
+        /* Methodology Section */
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .methodology-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .methodology-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .methodology-card h4 {
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+        
+        .methodology-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        /* Deep Dive Cards */
+        .deep-dive {
+            background: var(--bg-card);
+            border-left: 4px solid var(--primary);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .deep-dive h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .problem-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+        
+        .problem, .solution {
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        
+        .problem {
+            background: rgba(255, 59, 48, 0.1);
+            border: 1px solid rgba(255, 59, 48, 0.3);
+        }
+        
+        .solution {
+            background: rgba(52, 199, 89, 0.1);
+            border: 1px solid rgba(52, 199, 89, 0.3);
+        }
+        
+        .problem h5, .solution h5 {
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .problem h5 {
+            color: #FF3B30;
+        }
+        
+        .solution h5 {
+            color: var(--success);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 3rem 0;
+            margin-top: 6rem;
+            text-align: center;
+        }
+        
+        footer p {
+            color: var(--text-tertiary);
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .problem-solution {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline {
+                padding-left: 1.5rem;
+            }
+        }
+        
+        /* Print Styles */
+        @media print {
+            body::before, body::after {
+                display: none;
+            }
+            
+            nav {
+                position: relative;
+            }
+            
+            .card, .topology, .skill-category {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+                <h1 style="font-size: 1.4rem;">CC Networking</h1>
+                <p style="font-family: 'IBM Plex Sans', sans-serif; font-size: 0.85rem; color: var(--text-tertiary); font-weight: 400; margin: 0;">Jonathan Cannon</p>
+            </div>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#architecture">Architecture</a></li>
+                <li><a href="#evolution">Evolution</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#methodology">Methodology</a></li>
+                <li><a href="#examples">Examples</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h2>Network Engineering Portfolio</h2>
+            <p class="subtitle">Enterprise-grade homelab demonstrating practical networking, security hardening, and infrastructure automation skills developed through hands-on implementation and systematic learning.</p>
+            <p class="tagline">"Started with blocking Reddit for productivity. Built an enterprise network along the way."</p>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <span class="stat-value">1.2M</span>
+                    <span class="stat-label">DNS Filter Rules</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">48%</span>
+                    <span class="stat-label">Queries Blocked</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">~24ms</span>
+                    <span class="stat-label">DNS Response Time</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">99.9%</span>
+                    <span class="stat-label">Uptime</span>
+                </div>
+            </div>
+            
+            <div style="margin-top: 3rem;">
+                <a href="#" class="resume-button" onclick="alert('Please upload your resume PDF and update this link'); return false;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem;">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    Download Resume (PDF)
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h3>About Me</h3>
+            <p class="section-intro">How I ended up here, and why networking specifically.</p>
+            
+            <div class="card">
+                <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.9; margin-bottom: 1.5rem;">
+                    I needed to block Reddit for productivity. A browser extension would have worked, but I got curious about how DNS actually operates. That curiosity led to setting up AdGuard Home, which led to learning about DNS hierarchy, which led to understanding encrypted DNS, which eventually led to building the infrastructure documented in this portfolio. What started as a simple problem became a genuine fascination.
+                </p>
+                
+                <div style="background: rgba(10, 132, 255, 0.1); border-left: 4px solid var(--primary); padding: 1.5rem; border-radius: 8px; margin: 2rem 0;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.2rem;">What Draws Me to Networking</h4>
+                    <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.9; margin-bottom: 1rem;">
+                        Two things, mainly: the immediate impact and the problem-solving within constraints.
+                    </p>
+                    <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.9; margin-bottom: 1rem;">
+                        When the network works, everything works. When it doesn't, everything stops. There's something satisfying about working on infrastructure that foundational.
+                    </p>
+                    <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.9;">
+                        But what really interests me is the puzzle aspect: <em style="color: var(--primary);">"I want to accomplish X, and I have Y to work with."</em> Limited bandwidth? Security requirements? Budget constraints? The best solutions aren't just technically correct—they're creative within real-world limitations. That combination of technical precision and practical creativity is what keeps me engaged.
+                    </p>
+                </div>
+                
+                <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.9; margin-bottom: 1.5rem;">
+                    In my current IT Service Management role, I support the networking team with basic operations. It's given me exposure to how networks function in practice, but I want to move deeper into the design and architecture side. That's what this homelab is for—building hands-on experience with the concepts I'm studying for CCNA and planning to apply in cloud networking.
+                </p>
+                
+                <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.9;">
+                    My approach tends to be methodical: understand the principles, then implement. Question why something works the way it does before just configuring it. Document decisions so I can learn from them later. It's not the fastest way to do things, but it's how I build understanding that sticks.
+                </p>
+            </div>
+            
+            <div class="card" style="background: linear-gradient(135deg, rgba(10, 132, 255, 0.05) 0%, rgba(94, 92, 230, 0.05) 100%);">
+                <h4>The Same Pattern Everywhere</h4>
+                <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.8; margin-bottom: 1rem;">
+                    This deep-dive approach isn't unique to networking. A few years ago I got interested in film photography—initially just enjoying the nostalgia of shooting film. That led to wanting to understand manual photography and how exposure actually works. Then I realized sending film out for developing was expensive, so I started researching the chemistry and process to do it myself. Before long I'd built a darkroom in my basement and was printing my own photos, having gone from casual interest to full hands-on implementation.
+                </p>
+                <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.8;">
+                    Same pattern: curiosity about how something works, constraint that pushes deeper learning (cost of lab processing, need for productivity with Reddit), research to understand it properly, then hands-on implementation. Whether it's network segmentation or photographic chemistry, passion born from curiosity and constraint seems to be how I operate. That immersion is how I learn best.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="overview">
+        <div class="container">
+            <h3>Professional Context</h3>
+            <p class="section-intro">Currently working in IT Service Management with hands-on involvement in basic networking operations for the networking team. Through personal projects in my free time, I discovered a genuine passion for network engineering that extends far beyond my day-to-day responsibilities. This homelab represents my investment in developing enterprise-grade skills and understanding networking principles at a deeper level.</p>
+            
+            <div class="card" style="background: linear-gradient(135deg, rgba(10, 132, 255, 0.1) 0%, rgba(94, 92, 230, 0.1) 100%); border: 2px solid var(--primary); margin-bottom: 3rem;">
+                <h4 style="color: var(--primary); margin-bottom: 1.5rem;">Quick Summary</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                    <div>
+                        <p style="color: var(--text-tertiary); font-size: 0.9rem; margin-bottom: 0.5rem; font-weight: 600;">CURRENT ROLE</p>
+                        <p style="color: var(--text-primary); font-size: 1rem;">IT Service Management</p>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Supporting networking operations team</p>
+                    </div>
+                    <div>
+                        <p style="color: var(--text-tertiary); font-size: 0.9rem; margin-bottom: 0.5rem; font-weight: 600;">TARGET ROLE</p>
+                        <p style="color: var(--text-primary); font-size: 1rem;">Network Engineer</p>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Cloud Network Engineer focus</p>
+                    </div>
+                    <div>
+                        <p style="color: var(--text-tertiary); font-size: 0.9rem; margin-bottom: 0.5rem; font-weight: 600;">CERTIFICATIONS</p>
+                        <p style="color: var(--text-primary); font-size: 1rem;">CCNA (in progress)</p>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Azure networking path planned</p>
+                    </div>
+                    <div>
+                        <p style="color: var(--text-tertiary); font-size: 0.9rem; margin-bottom: 0.5rem; font-weight: 600;">LOCATION</p>
+                        <p style="color: var(--text-primary); font-size: 1rem;">Boston, MA area</p>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Open to remote opportunities</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h4>What This Homelab Demonstrates</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">This isn't just a hobby setup—it's a deliberate learning platform built using enterprise methodologies and principles. Every component was chosen to maximize both learning value and practical utility, bridging the gap between consumer technology and enterprise infrastructure.</p>
+                
+                <div class="skills-grid" style="margin-top: 2rem;">
+                    <div>
+                        <h4 style="font-size: 1rem; color: var(--primary);">Technical Skills</h4>
+                        <ul style="list-style: none; color: var(--text-secondary);">
+                            <li style="padding: 0.5rem 0;">▹ Network architecture & design</li>
+                            <li style="padding: 0.5rem 0;">▹ DNS infrastructure & security</li>
+                            <li style="padding: 0.5rem 0;">▹ VLAN planning & segmentation</li>
+                            <li style="padding: 0.5rem 0;">▹ Docker containerization</li>
+                            <li style="padding: 0.5rem 0;">▹ Infrastructure monitoring</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 1rem; color: var(--primary);">Enterprise Practices</h4>
+                        <ul style="list-style: none; color: var(--text-secondary);">
+                            <li style="padding: 0.5rem 0;">▹ Security-first mindset</li>
+                            <li style="padding: 0.5rem 0;">▹ Defense in depth approach</li>
+                            <li style="padding: 0.5rem 0;">▹ Change management discipline</li>
+                            <li style="padding: 0.5rem 0;">▹ Systematic documentation</li>
+                            <li style="padding: 0.5rem 0;">▹ Comprehensive monitoring</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="architecture">
+        <div class="container">
+            <h3>Current Architecture</h3>
+            <p class="section-intro">A defense-in-depth network design prioritizing security, privacy, and centralized management. Built from the ground up with enterprise principles: network segmentation, encrypted DNS, comprehensive monitoring, and automated maintenance.</p>
+            
+            <div class="topology">
+                <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Internet -->
+                    <circle cx="400" cy="50" r="30" fill="#FF3B30" opacity="0.2" stroke="#FF3B30" stroke-width="2"/>
+                    <text x="400" y="55" text-anchor="middle" fill="#FF3B30" font-family="JetBrains Mono" font-size="12" font-weight="600">INTERNET</text>
+                    
+                    <!-- Router -->
+                    <rect x="350" y="120" width="100" height="60" rx="8" fill="#0A84FF" opacity="0.2" stroke="#0A84FF" stroke-width="2"/>
+                    <text x="400" y="145" text-anchor="middle" fill="#E8EAED" font-family="JetBrains Mono" font-size="11" font-weight="600">ASUS ZenWiFi</text>
+                    <text x="400" y="160" text-anchor="middle" fill="#98A2B3" font-family="IBM Plex Sans" font-size="10">192.168.50.1</text>
+                    <text x="400" y="172" text-anchor="middle" fill="#98A2B3" font-family="IBM Plex Sans" font-size="9">Firewall + DHCP</text>
+                    
+                    <!-- Line from Internet to Router -->
+                    <line x1="400" y1="80" x2="400" y2="120" stroke="#0A84FF" stroke-width="2"/>
+                    
+                    <!-- Main Network Line -->
+                    <line x1="400" y1="180" x2="400" y2="240" stroke="#0A84FF" stroke-width="2"/>
+                    <line x1="150" y1="240" x2="650" y2="240" stroke="#0A84FF" stroke-width="2"/>
+                    
+                    <!-- Subnet Label -->
+                    <text x="400" y="225" text-anchor="middle" fill="#0A84FF" font-family="JetBrains Mono" font-size="10" font-weight="600">192.168.50.0/24</text>
+                    
+                    <!-- NAS/DNS Server -->
+                    <rect x="325" y="280" width="150" height="100" rx="8" fill="#34C759" opacity="0.2" stroke="#34C759" stroke-width="2"/>
+                    <text x="400" y="300" text-anchor="middle" fill="#E8EAED" font-family="JetBrains Mono" font-size="12" font-weight="700">Synology DS223</text>
+                    <text x="400" y="315" text-anchor="middle" fill="#98A2B3" font-family="IBM Plex Sans" font-size="10">192.168.50.28</text>
+                    <text x="400" y="335" text-anchor="middle" fill="#34C759" font-family="IBM Plex Sans" font-size="9" font-weight="600">AdGuard Home (DNS)</text>
+                    <text x="400" y="348" text-anchor="middle" fill="#98A2B3" font-family="IBM Plex Sans" font-size="9">Uptime Kuma</text>
+                    <text x="400" y="360" text-anchor="middle" fill="#98A2B3" font-family="IBM Plex Sans" font-size="9">Jellyfin • FreshRSS</text>
+                    <text x="400" y="372" text-anchor="middle" fill="#98A2B3" font-family="IBM Plex Sans" font-size="9">Homer • Watchtower</text>
+                    
+                    <!-- Line from network to NAS -->
+                    <line x1="400" y1="240" x2="400" y2="280" stroke="#34C759" stroke-width="2"/>
+                    
+                    <!-- Client Devices -->
+                    <rect x="50" y="280" width="120" height="60" rx="8" fill="#5E5CE6" opacity="0.2" stroke="#5E5CE6" stroke-width="2"/>
+                    <text x="110" y="305" text-anchor="middle" fill="#E8EAED" font-family="JetBrains Mono" font-size="10" font-weight="600">Main Devices</text>
+                    <text x="110" y="318" text-anchor="middle" fill="#98A2B3" font-family="IBM Plex Sans" font-size="9">PCs, Phones</text>
+                    <text x="110" y="330" text-anchor="middle" fill="#98A2B3" font-family="IBM Plex Sans" font-size="9">Tablets, Laptops</text>
+                    <line x1="150" y1="240" x2="110" y2="280" stroke="#5E5CE6" stroke-width="2"/>
+                    
+                    <!-- IoT Devices -->
+                    <rect x="530" y="280" width="120" height="60" rx="8" fill="#5E5CE6" opacity="0.2" stroke="#5E5CE6" stroke-width="2"/>
+                    <text x="590" y="305" text-anchor="middle" fill="#E8EAED" font-family="JetBrains Mono" font-size="10" font-weight="600">IoT Devices</text>
+                    <text x="590" y="318" text-anchor="middle" fill="#98A2B3" font-family="IBM Plex Sans" font-size="9">Hue Lights</text>
+                    <text x="590" y="330" text-anchor="middle" fill="#98A2B3" font-family="IBM Plex Sans" font-size="9">Yale Locks • Arlo</text>
+                    <line x1="650" y1="240" x2="590" y2="280" stroke="#5E5CE6" stroke-width="2"/>
+                    
+                    <!-- Guest Network -->
+                    <rect x="50" y="380" width="120" height="50" rx="8" fill="#FF9500" opacity="0.2" stroke="#FF9500" stroke-width="2"/>
+                    <text x="110" y="400" text-anchor="middle" fill="#E8EAED" font-family="JetBrains Mono" font-size="10" font-weight="600">Guest Network</text>
+                    <text x="110" y="413" text-anchor="middle" fill="#98A2B3" font-family="IBM Plex Sans" font-size="9">Isolated VLAN</text>
+                    <text x="110" y="423" text-anchor="middle" fill="#98A2B3" font-family="IBM Plex Sans" font-size="9">Bandwidth Limited</text>
+                    <line x1="150" y1="240" x2="110" y2="380" stroke="#FF9500" stroke-width="2" stroke-dasharray="5,5"/>
+                    
+                    <!-- Security Features Box -->
+                    <rect x="530" y="420" width="240" height="140" rx="8" fill="#141B3D" stroke="#2A3654" stroke-width="1"/>
+                    <text x="650" y="440" text-anchor="middle" fill="#0A84FF" font-family="JetBrains Mono" font-size="11" font-weight="700">SECURITY LAYERS</text>
+                    <text x="545" y="460" fill="#98A2B3" font-family="IBM Plex Sans" font-size="9">▹ WPA2/WPA3 encryption</text>
+                    <text x="545" y="475" fill="#98A2B3" font-family="IBM Plex Sans" font-size="9">▹ DNS-over-TLS upstream</text>
+                    <text x="545" y="490" fill="#98A2B3" font-family="IBM Plex Sans" font-size="9">▹ 1.2M filter rules active</text>
+                    <text x="545" y="505" fill="#98A2B3" font-family="IBM Plex Sans" font-size="9">▹ Malware/phishing blocking</text>
+                    <text x="545" y="520" fill="#98A2B3" font-family="IBM Plex Sans" font-size="9">▹ No port forwarding</text>
+                    <text x="545" y="535" fill="#98A2B3" font-family="IBM Plex Sans" font-size="9">▹ Guest isolation</text>
+                    <text x="545" y="550" fill="#98A2B3" font-family="IBM Plex Sans" font-size="9">▹ UPnP disabled</text>
+                    
+                    <!-- Monitoring Box -->
+                    <rect x="30" y="480" width="200" height="80" rx="8" fill="#141B3D" stroke="#2A3654" stroke-width="1"/>
+                    <text x="130" y="500" text-anchor="middle" fill="#34C759" font-family="JetBrains Mono" font-size="11" font-weight="700">MONITORING</text>
+                    <text x="45" y="520" fill="#98A2B3" font-family="IBM Plex Sans" font-size="9">▹ Uptime Kuma health checks</text>
+                    <text x="45" y="535" fill="#98A2B3" font-family="IBM Plex Sans" font-size="9">▹ Telegram notifications</text>
+                    <text x="45" y="550" fill="#98A2B3" font-family="IBM Plex Sans" font-size="9">▹ Watchtower auto-updates</text>
+                </svg>
+            </div>
+            
+            <div class="card">
+                <h4>Key Infrastructure Components</h4>
+                <div class="skills-grid" style="margin-top: 1.5rem;">
+                    <div>
+                        <h4 style="font-size: 1rem; color: var(--primary); margin-bottom: 1rem;">Core Services</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.8;">
+                            <strong style="color: var(--text-primary);">AdGuard Home:</strong> Network-wide DNS filtering with 1.2M rules, DNS-over-TLS encryption to Cloudflare/Quad9, 48% blocking rate<br><br>
+                            <strong style="color: var(--text-primary);">Docker Infrastructure:</strong> Containerized services for monitoring, media, RSS aggregation, and dashboard management<br><br>
+                            <strong style="color: var(--text-primary);">Uptime Kuma:</strong> Comprehensive health monitoring with Telegram alerting for all critical services
+                        </p>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 1rem; color: var(--primary); margin-bottom: 1rem;">Security Hardening</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.8;">
+                            <strong style="color: var(--text-primary);">Network Perimeter:</strong> WPA2/WPA3 encryption, disabled WPS/UPnP, no remote management, ASUS AiProtection IPS<br><br>
+                            <strong style="color: var(--text-primary);">DNS Security:</strong> Strict DoT mode, malware/phishing blocklists, custom filtering rules, ISP-blind queries<br><br>
+                            <strong style="color: var(--text-primary);">Segmentation:</strong> Guest network isolation, bandwidth limiting, no inter-VLAN communication
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="evolution">
+        <div class="container">
+            <h3>Evolution Timeline</h3>
+            <p class="section-intro">What started as a simple productivity hack evolved into a comprehensive learning journey through network engineering, security, and infrastructure automation. Each phase built on previous knowledge while introducing new enterprise concepts.</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">PHASE 1 • Initial Goal</div>
+                    <div class="timeline-content">
+                        <h4>The Reddit Problem</h4>
+                        <p><strong>Challenge:</strong> Needed to block Reddit for improved productivity but wanted more control than browser extensions.</p>
+                        <p><strong>Initial Approach:</strong> Basic router-level blocking using consumer router features.</p>
+                        <p><strong>Realization:</strong> Limited control, no logging, couldn't block at DNS level effectively. Sparked curiosity about how DNS actually works.</p>
+                        <span class="tag">Catalyst</span>
+                        <span class="tag">Learning Trigger</span>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">PHASE 2 • DNS Discovery</div>
+                    <div class="timeline-content">
+                        <h4>Understanding DNS Infrastructure</h4>
+                        <p><strong>What I Built:</strong> Deployed Pi-hole initially, then migrated to AdGuard Home for better features and web interface.</p>
+                        <ul>
+                            <li>Set up dedicated DNS server on Raspberry Pi</li>
+                            <li>Configured DHCP to push DNS server to all clients</li>
+                            <li>Implemented basic blocklists and custom rules</li>
+                            <li>Learned about DNS hierarchy, query types, and resolution flow</li>
+                        </ul>
+                        <p><strong>Key Learning:</strong> DNS is foundational to networking. Understanding recursive vs. iterative queries, caching, TTLs, and how resolution actually works was eye-opening.</p>
+                        <span class="tag success">DNS Mastery</span>
+                        <span class="tag">Network Foundation</span>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">PHASE 3 • Privacy & Security Focus</div>
+                    <div class="timeline-content">
+                        <h4>Encryption & Defense in Depth</h4>
+                        <p><strong>What I Built:</strong> Implemented DNS-over-TLS, expanded blocklists, hardened router security.</p>
+                        <ul>
+                            <li>Configured DoT to Cloudflare and Quad9 (ISP-blind DNS queries)</li>
+                            <li>Added malware, phishing, and tracker blocklists (~1.2M rules)</li>
+                            <li>Disabled WPS, UPnP, remote management on router</li>
+                            <li>Enabled WPA2/WPA3 mixed mode encryption</li>
+                            <li>Created isolated guest network</li>
+                        </ul>
+                        <p><strong>Key Learning:</strong> Security is layered. Each hardening step reduces attack surface. Understanding WHY each measure matters (not just following a checklist) makes the difference.</p>
+                        <span class="tag success">Security Hardening</span>
+                        <span class="tag">Encryption</span>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">PHASE 4 • Infrastructure Expansion</div>
+                    <div class="timeline-content">
+                        <h4>Centralized Services & Automation</h4>
+                        <p><strong>What I Built:</strong> Migrated to Synology NAS, deployed multiple Docker containers, implemented monitoring.</p>
+                        <ul>
+                            <li>Moved AdGuard to NAS for better reliability and resources</li>
+                            <li>Deployed Uptime Kuma with Telegram notifications</li>
+                            <li>Set up Watchtower for automated container updates</li>
+                            <li>Created Homer dashboard for centralized service access</li>
+                            <li>Implemented DNS rewrites for clean internal URLs (.home TLD)</li>
+                            <li>Added Jellyfin media server and FreshRSS</li>
+                        </ul>
+                        <p><strong>Key Learning:</strong> Containerization enables rapid deployment and consistent environments. Monitoring isn't optional—you need visibility into what's running and when things break.</p>
+                        <span class="tag success">Docker</span>
+                        <span class="tag success">Automation</span>
+                        <span class="tag">Monitoring</span>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">PHASE 5 • Current: Enterprise Transition</div>
+                    <div class="timeline-content">
+                        <h4>Moving to Enterprise-Grade Infrastructure</h4>
+                        <p><strong>What I'm Building:</strong> Replacing consumer equipment with enterprise gear, implementing proper VLANs, systematic documentation.</p>
+                        <ul>
+                            <li>Planning Protectli VP2420 firewall with OPNsense</li>
+                            <li>Evaluating MikroTik CRS326 managed switches</li>
+                            <li>Designing VLAN architecture (main, guest, IoT, management)</li>
+                            <li>Documenting network topology and configurations</li>
+                            <li>Preparing for Home Assistant deployment</li>
+                            <li>Adding UPS for power protection and monitoring</li>
+                        </ul>
+                        <p><strong>Key Learning:</strong> Consumer gear teaches basics, but enterprise equipment exposes you to real network engineering concepts. VLANs, routing policies, firewall rules—these are what translate directly to professional environments.</p>
+                        <span class="tag">In Progress</span>
+                        <span class="tag critical">VLAN Design</span>
+                        <span class="tag">OPNsense</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h3>Skills & Competencies</h3>
+            <p class="section-intro">Technical skills developed through hands-on implementation, mapped to enterprise networking and cloud engineering requirements.</p>
+            
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>Network Fundamentals</h4>
+                    <ul>
+                        <li>TCP/IP, OSI model, subnetting</li>
+                        <li>DNS architecture and resolution</li>
+                        <li>DHCP configuration and scope management</li>
+                        <li>WiFi standards, channels, mesh networking</li>
+                        <li>Network segmentation and VLANs</li>
+                        <li>Routing fundamentals</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h4>Security & Hardening</h4>
+                    <ul>
+                        <li>Defense in depth methodology</li>
+                        <li>Firewall rule design and management</li>
+                        <li>DNS-over-TLS/HTTPS encryption</li>
+                        <li>Attack surface reduction</li>
+                        <li>Network access control</li>
+                        <li>Intrusion prevention systems</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h4>Infrastructure & Services</h4>
+                    <ul>
+                        <li>Docker containerization</li>
+                        <li>Linux system administration</li>
+                        <li>Service monitoring and alerting</li>
+                        <li>Automated maintenance workflows</li>
+                        <li>Load balancing concepts</li>
+                        <li>High availability planning</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h4>Tools & Technologies</h4>
+                    <ul>
+                        <li>AdGuard Home DNS filtering</li>
+                        <li>Docker & Docker Compose</li>
+                        <li>OPNsense firewall (planned)</li>
+                        <li>MikroTik RouterOS (learning)</li>
+                        <li>Uptime Kuma monitoring</li>
+                        <li>Git version control</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h4>Enterprise Practices</h4>
+                    <ul>
+                        <li>Change management discipline</li>
+                        <li>Systematic documentation</li>
+                        <li>Network topology mapping</li>
+                        <li>Configuration backup strategies</li>
+                        <li>Troubleshooting methodology</li>
+                        <li>Capacity planning</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h4>Current Learning Path</h4>
+                    <ul>
+                        <li>CCNA certification study</li>
+                        <li>Azure cloud networking (AZ-900, AZ-700)</li>
+                        <li>Advanced routing protocols</li>
+                        <li>SD-WAN concepts</li>
+                        <li>Network automation</li>
+                        <li>Cloud architecture patterns</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="methodology">
+        <div class="container">
+            <h3>Methodology & Approach</h3>
+            <p class="section-intro">How I approach learning, problem-solving, and implementation—emphasizing understanding over following instructions.</p>
+            
+            <div class="methodology-grid">
+                <div class="methodology-card">
+                    <div class="methodology-icon">🎯</div>
+                    <h4>Principle-First Learning</h4>
+                    <p>I don't just follow tutorials—I ask "why" at every step. Understanding DNS hierarchy before implementing DNS filtering. Grasping encryption principles before configuring DoT. This foundation makes troubleshooting intuitive.</p>
+                </div>
+                
+                <div class="methodology-card">
+                    <div class="methodology-icon">🔬</div>
+                    <h4>Systematic Troubleshooting</h4>
+                    <p>Work through problems methodically: verify symptoms, isolate variables, test hypotheses, document findings. When AdGuard logs stopped working, traced through browser console, network inspection, and container logs to identify root cause.</p>
+                </div>
+                
+                <div class="methodology-card">
+                    <div class="methodology-icon">📚</div>
+                    <h4>Documentation as Learning</h4>
+                    <p>Comprehensive documentation isn't busywork—it's how I internalize concepts. Network topology maps, configuration templates, and architecture decisions all force me to articulate my understanding clearly.</p>
+                </div>
+                
+                <div class="methodology-card">
+                    <div class="methodology-icon">🤖</div>
+                    <h4>AI-Assisted, Not AI-Dependent</h4>
+                    <p>I use AI as a research assistant and concept validator, not a solution generator. I ask clarifying questions, challenge recommendations, and ensure I understand the underlying principles before implementing anything. AI accelerates learning but doesn't replace it.</p>
+                </div>
+                
+                <div class="methodology-card">
+                    <div class="methodology-icon">🔐</div>
+                    <h4>Security-First Mindset</h4>
+                    <p>Every architectural decision considers security implications. Not just "is this secure?" but "what are the attack vectors, what's the blast radius if compromised, and how do we detect and respond?" Defense in depth by default.</p>
+                </div>
+                
+                <div class="methodology-card">
+                    <div class="methodology-icon">🎓</div>
+                    <h4>Enterprise Methodology at Home</h4>
+                    <p>Treat homelab projects with professional rigor: change management, rollback plans, monitoring before and after changes, documentation of lessons learned. These practices translate directly to production environments.</p>
+                </div>
+            </div>
+            
+            <div class="card" style="margin-top: 3rem;">
+                <h4>Example: My AI-Assisted Learning Process</h4>
+                <div class="code-block">
+                    <code>
+<span style="color: #6B7A99;">// When approaching a new concept or implementation:</span>
+
+<span style="color: #34C759;">1. Research & Understand</span>
+   - Use AI to explain core concepts in depth
+   - Ask clarifying questions until I grasp fundamentals
+   - Explore "why" not just "how"
+   
+<span style="color: #0A84FF;">2. Challenge & Validate</span>
+   - Question AI recommendations
+   - Cross-reference with official documentation
+   - Verify against my understanding of principles
+   
+<span style="color: #FF9500;">3. Implement & Test</span>
+   - Build from understanding, not copy-paste
+   - Test each component systematically
+   - Document deviations and decisions
+   
+<span style="color: #5E5CE6;">4. Troubleshoot & Refine</span>
+   - Work through problems independently first
+   - Use AI for specific debugging assistance
+   - Document solutions for future reference
+
+<span style="color: #6B7A99;">// Result: Deep understanding + accelerated learning</span>
+<span style="color: #6B7A99;">// Not just "it works" but "I know WHY it works"</span>
+                    </code>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="examples">
+        <div class="container">
+            <h3>Technical Experience</h3>
+            <p class="section-intro">Real problems solved, both in professional environments and personal infrastructure - demonstrating troubleshooting methodology and technical understanding.</p>
+            
+            <h4 style="color: var(--primary); margin-top: 3rem; margin-bottom: 2rem; font-size: 1.5rem;">Professional Experience</h4>
+            
+            <div class="deep-dive">
+                <h4>Crisis Response: Network Outage During Maintenance</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;"><strong>Context:</strong> While on call with the networking team preparing to install a backup fiber circuit, I accidentally disconnected the primary fiber connection (connector wasn't properly secured by previous installation). This caused an immediate total network outage for the office.</p>
+                
+                <div class="problem-solution">
+                    <div class="problem">
+                        <h5>Challenge</h5>
+                        <p>Essential services down. Users reporting outages. Multiple stakeholders needing coordination: end users expecting communication, remote networking team needing to restore services once physical connection was fixed, and my own mistake to own and resolve quickly.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>Response</h5>
+                        <p>Immediately reseated the fiber connection and verified physical connectivity. Coordinated with remote networking team as they brought services back online. Communicated outage status and apology to affected users. Network fully restored in under 30 minutes from initial disconnect.</p>
+                    </div>
+                </div>
+                
+                <p style="color: var(--text-secondary); margin-top: 1.5rem;"><strong>Key Takeaway:</strong> Mistakes happen, especially during maintenance. What matters is immediate ownership, clear communication to all stakeholders, and systematic coordination to restore services quickly. Also learned to verify physical infrastructure security before assuming it's properly installed - trust but verify.</p>
+                <span class="tag critical">Incident Response</span>
+                <span class="tag">Multi-Stakeholder Coordination</span>
+                <span class="tag">Communication Under Pressure</span>
+            </div>
+            
+            <div class="deep-dive">
+                <h4>Collaborative Operations: Quarterly Maintenance & Infrastructure Projects</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;"><strong>Context:</strong> Regular collaboration with remote networking team on critical infrastructure maintenance and upgrades.</p>
+                
+                <div style="background: rgba(10, 132, 255, 0.05); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0;">
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;"><strong style="color: var(--text-primary);">Quarterly Network Maintenance:</strong> Remotely tested network services across Boston and New York locations following routine updates during overnight maintenance windows. Verified connectivity, service availability, and performance after changes were implemented.</p>
+                    
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;"><strong style="color: var(--text-primary);">Firewall Installation Project:</strong> Hands-on installation of new firewall hardware in LAN room, coordinating between on-site work and remote networking team configuration.</p>
+                    
+                    <p style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Annual Power Outage Preparation:</strong> Coordinated graceful hardware shutdown for building-wide power maintenance. Worked with UPS installation, performed systematic shutdown procedures, and coordinated timing between local facilities and remote networking team to minimize service disruption.</p>
+                </div>
+                
+                <p style="color: var(--text-secondary); margin-top: 1.5rem;"><strong>Key Takeaway:</strong> Infrastructure work requires coordination across time zones, clear communication of status and dependencies, and methodical verification at each step. Being the on-site presence for a remote team means being their eyes and hands - precision and clear reporting matter.</p>
+                <span class="tag success">Team Collaboration</span>
+                <span class="tag">Infrastructure Operations</span>
+                <span class="tag">Cross-Location Coordination</span>
+            </div>
+            
+            <h4 style="color: var(--primary); margin-top: 4rem; margin-bottom: 2rem; font-size: 1.5rem;">Homelab Projects</h4>
+            
+            <div class="deep-dive">
+                <h4>Case Study 1: DNS Query Logging Failure</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;"><strong>Context:</strong> AdGuard's query log suddenly stopped displaying queries in the web interface, breaking visibility into DNS traffic—critical for security monitoring and troubleshooting.</p>
+                
+                <div class="problem-solution">
+                    <div class="problem">
+                        <h5>Problem</h5>
+                        <p>Query log showed "loading" indefinitely. Backend API returned data correctly (verified via curl), but frontend failed to render. No obvious errors in AdGuard logs. Other admin functions worked normally.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>Solution</h5>
+                        <p>Opened browser developer console and identified JavaScript errors in AdGuard's frontend code. Traced to a parsing issue with query timestamps. Cleared browser cache, which resolved the issue—frontend was caching broken JavaScript.</p>
+                    </div>
+                </div>
+                
+                <p style="color: var(--text-secondary); margin-top: 1.5rem;"><strong>Key Takeaway:</strong> Don't assume the problem is where it appears. Systematically verify each layer (network → backend → frontend) before concluding root cause. Browser dev tools are essential for web-based admin interfaces.</p>
+                <span class="tag">Troubleshooting</span>
+                <span class="tag">Systematic Debugging</span>
+            </div>
+            
+            <div class="deep-dive">
+                <h4>Case Study 2: DNS-over-TLS Implementation</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;"><strong>Context:</strong> ISP could see all DNS queries in plaintext, revealing browsing patterns despite HTTPS encrypting webpage content. Wanted to implement encrypted DNS while maintaining performance.</p>
+                
+                <div class="problem-solution">
+                    <div class="problem">
+                        <h5>Challenge</h5>
+                        <p>Standard DNS queries are unencrypted UDP port 53. Even with AdGuard blocking ads/trackers locally, upstream queries to Cloudflare/Quad9 were visible to ISP. Needed encryption without breaking local DNS resolution speed.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>Implementation</h5>
+                        <p>Configured AdGuard to use DNS-over-TLS (DoT) in strict mode with tls://1.1.1.1 and tls://dns.quad9.net upstreams. Enabled optimistic caching to minimize upstream queries. Verified encryption with Wireshark packet captures—no plaintext DNS visible.</p>
+                    </div>
+                </div>
+                
+                <p style="color: var(--text-secondary); margin-top: 1.5rem;"><strong>Key Takeaway:</strong> Privacy isn't just about blocking ads—it's about understanding where data leaks occur. DNS-over-TLS encrypts queries end-to-end, but requires understanding the difference between DoT, DoH, and standard DNS to implement correctly. Performance impact was negligible due to proper caching strategy.</p>
+                <span class="tag success">Privacy Enhancement</span>
+                <span class="tag success">Encryption</span>
+                <span class="tag">Performance Optimization</span>
+            </div>
+            
+            <div class="deep-dive">
+                <h4>Case Study 3: Network Segmentation Planning</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;"><strong>Context:</strong> All devices on single flat network (192.168.50.0/24) with no isolation. IoT devices had same network access as trusted PCs. Guest devices could potentially see internal services.</p>
+                
+                <div class="problem-solution">
+                    <div class="problem">
+                        <h5>Security Risk</h5>
+                        <p>Compromised IoT device could pivot to internal infrastructure. Guest devices had visibility into NAS and services. No network-level separation between trust zones. Single broadcast domain caused unnecessary traffic.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>VLAN Architecture</h5>
+                        <p>Designed four-VLAN structure: .main.home (trusted devices), .guest.home (visitors, internet-only), .iot.home (smart home, no LAN access), .mgmt.home (infrastructure admin). Planned firewall rules for inter-VLAN traffic control. Documented requirements for OPNsense implementation.</p>
+                    </div>
+                </div>
+                
+                <p style="color: var(--text-secondary); margin-top: 1.5rem;"><strong>Key Takeaway:</strong> Network segmentation isn't just about VLANs—it's about understanding trust boundaries and minimizing blast radius. Each VLAN represents a security zone with specific access requirements. Planning before implementation prevents configuration drift and ensures consistent policy enforcement.</p>
+                <span class="tag critical">Architecture Design</span>
+                <span class="tag">VLAN Planning</span>
+                <span class="tag">Security Zoning</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>This portfolio demonstrates practical networking skills developed through hands-on implementation and systematic learning.</p>
+            <p style="margin-top: 0.5rem;">Built with enterprise principles. Currently pursuing CCNA certification and Azure cloud networking credentials.</p>
+            <p style="margin-top: 1.5rem; color: var(--text-tertiary); font-size: 0.9rem;">Network topology and infrastructure details accurate as of December 2025</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Add active state to nav links on scroll
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+        function updateActiveNav() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.color = 'var(--text-secondary)';
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.style.color = 'var(--primary)';
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNav);
+        updateActiveNav();
+    </script>
+</body>
+</html>
