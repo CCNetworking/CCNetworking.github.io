@@ -164,4 +164,13 @@ themselves and each other, and live a shared calendar.
 - A "continue" action is a normal generation request with no user message.
 - Characters reacting to each other's images needs a vision-capable model: the model question is no longer
   irrelevant.
-- Memories made from away-time chats arrive as **proposed**, pending the owner's curation.
+- **Decision (owner):** memories from away-time chats are committed automatically, and the owner curates by
+  selectively deleting what they dislike. (This replaced an earlier "proposed, pending review" idea and a
+  two-tier recent/committed idea.)
+- Refinements proposed by the assistant (not yet confirmed): auto-committed away-time memories carry an
+  "unreviewed" marker and enter at low importance; the catch-up digest is the place to review and delete them;
+  a deleted memory is remembered as dismissed so it is not re-learned from the same chat; character-only
+  channels can be rewound to a point, with memories made after it flagged keep/drop (the existing rewind
+  behaviour); memories can be about any participant (characters about each other), not just the user.
+- Because memory is committed automatically, "unscanned" no longer holds an away-time chat from expiring; the
+  hard ceiling on never-expiring chats matters less.
