@@ -40,7 +40,8 @@ get a full design now; 3 to 9 are designed when reached.
   memory came from), even though only DMs ship first.
 
 **Retention**
-- A conversation expires only when it is idle for the set period AND has no unscanned memory. Active chats never expire.
+- A conversation expires only when it is idle for **30 days** AND has no unscanned memory. Active chats never expire.
+- A per-chat "keep" pin exempts a chat from expiry.
 - The engine records the last scanned message per conversation; messages past the mark mean "unscanned".
 - Visible "unscanned" badge on chats.
 - Memories from an expired chat just say "expired"; no pointer back.
@@ -88,7 +89,6 @@ get a full design now; 3 to 9 are designed when reached.
 
 ## Open items
 
-- Idle period before a chat expires (not yet chosen); whether a per-chat "keep" pin exists.
 - Hard ceiling on "unscanned, never expires" (optional).
 - Which model, its size, and whether it can see images (user said not important now).
 - Image backend choice (research later).
@@ -102,3 +102,40 @@ get a full design now; 3 to 9 are designed when reached.
   time (trust, mood), prompt budget view, worlds and global rules, relationships between characters, the
   Workshop (free-form creative assistant), interview steering, tag history, in-character check that learns.
 - Selective import of a few specific LibreChat chats (only if wanted later).
+
+### Day-2 nice-to-haves (brainstormed after the freeze; none promoted)
+
+**Presence and feel**
+- Character presence and status (online, away, asleep) derived from her rhythm, shown in the sidebar.
+- Typing indicators, natural delays, "seen" marks; characters reacting to messages with emoji, Discord-style.
+- Per-character and per-channel look: avatars drawn from the trained look, accent colours, a sticker/emote set generated from it.
+- Voice: local text-to-speech voice messages from characters; local speech-to-text dictation.
+
+**Catching up and finding things**
+- "While you were away" digest per channel, with a catch-up button.
+- Search across live chats, memories and the notebook; a quick switcher (Cmd-K).
+- Bookmarks/pins inside a chat; a story timeline per channel built from chapters.
+- Shared gallery of images per character or channel, with favourites and keep.
+
+**Writing and steering aids**
+- Write my line (roadmap) and "continue for me" for a few turns.
+- Scene HUD: a card showing current setting, outfit, scenarios and tones, with a state history you can scrub back through.
+- Prompt budget view (roadmap), with suggestions to trim.
+- Image redo with variations, edit-the-prompt-before-generating, reference-image upload.
+
+**Character quality**
+- Drift check: replay saved scenarios against a character after a sheet edit and flag changes in voice.
+- Side-by-side compare of two sheet versions, or two models, on the same prompt.
+- Relationship map between characters; free-form character state over time (trust, mood).
+
+**World**
+- In-world clock and calendar: birthdays, planned get-togethers and scripted events (a movie night) that drive autonomy.
+- Anniversaries and dated callbacks ("a year since...") as motives for initiated messages.
+- Per-channel notification rules and do-not-disturb schedules.
+
+**Operations and safety**
+- Engine status page: queue, model load, errors, a "needs a look" inbox.
+- Backup restore UI and integrity checks.
+- Passkey (WebAuthn) login, auto-lock after idle, quick-hide screen for the app switcher.
+- Accessibility pass: font size, screen reader, keyboard shortcuts.
+- Export a chat or chapters as Markdown; later, the novel path.
