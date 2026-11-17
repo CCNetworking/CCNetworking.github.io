@@ -188,3 +188,22 @@ the owner removed it (or per character)?
 **Owner's answer on forgetting:** the gap is experienced in the story. A character may comment that she doesn't
 remember something, and others who were there may remember it and comment too ("life-like"). Knowing the owner
 removed it is a backstage-only matter.
+
+## Look and layout (project 2 input)
+
+**Decided by the owner**
+- Not Apple-style. The base look is "Lantern": a warm, dark, inviting room, with no gamer-chic and no neon.
+- Accent is a **red-leaning purple** (plum / merlot / garnet are the candidates). Pure violet read as corporate.
+- Messages are **bubbles**.
+- **Large, prominent portraits** with room for detail (the owner will train each character's look).
+- Likes the DMs and Channels structure; wants more Discord inspiration in layout and features.
+- Sleeker than the first mockups: thinner lines, tighter corners. Typeface Figtree (assistant's pick).
+
+**Discord features proposed in the v4 mockup (not yet confirmed)**
+- World rail (each world is a server; one is enough to start), categorised collapsible channels, find/quick-switch (Cmd-K).
+- Bottom-left user panel with persona and a persona switcher.
+- Topic bar showing the channel brief; member panel grouped by presence, with channel brief and channel memory.
+- Per-message hover actions: react, reply, remember, retry, fork here. Reactions, reply quotes, "New" divider, typing indicator.
+- Character-only channels are read-only with a "Join in" button and a review of memories saved from them.
+
+Mockup: https://claude.ai/artifact/MsT4v5TWC4WhHpkuJPBkyG (private; stand-in portraits; made-up content).
