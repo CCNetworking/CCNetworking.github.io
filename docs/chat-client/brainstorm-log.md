@@ -174,3 +174,13 @@ themselves and each other, and live a shared calendar.
   behaviour); memories can be about any participant (characters about each other), not just the user.
 - Because memory is committed automatically, "unscanned" no longer holds an away-time chat from expiring; the
   hard ceiling on never-expiring chats matters less.
+
+### Cherry: characters react to being made to forget (owner's idea)
+
+Instead of a silent delete, deleting a memory becomes "forgetting": the memory is replaced by a content-free
+redacted marker, the source stretch of chat is hidden from that character's context (it stays in the owner's
+transcript until expiry), and the gap becomes a motive for autonomy (she may text about not remembering).
+Forgetting is per character, so others who were there still remember; whether they fill the gap in depends on
+their gossip level. Per-character setting for how she reacts. Risks: models fixate on a mentioned gap; may break
+immersion in some modes; the marker must carry no content. Open: is the gap experienced in-story, or does she know
+the owner removed it (or per character)?
