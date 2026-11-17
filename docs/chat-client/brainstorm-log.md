@@ -214,3 +214,7 @@ Mockup: https://claude.ai/artifact/MsT4v5TWC4WhHpkuJPBkyG (private; stand-in por
 specific scenarios. Foundation note: channels, memories and the calendar belong to a server (`server_id` from the
 start of project 1), and a character can belong to several servers. The UI starts with one server. Open: whether a
 scenario server is a sealed sandbox or counts in the characters' lives (memory flowing between servers).
+
+**Decided (owner): servers are sealed by default.** What happens in a scenario server stays there. To bring something
+into the ecosystem, the owner sends it to the notebook and pushes it later, on their own terms. The notebook is the
+bridge between servers. Assistant's call: no automatic "shared" mode in the first version; a shared option is a cherry.
