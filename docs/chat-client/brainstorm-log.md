@@ -184,3 +184,7 @@ Forgetting is per character, so others who were there still remember; whether th
 their gossip level. Per-character setting for how she reacts. Risks: models fixate on a mentioned gap; may break
 immersion in some modes; the marker must carry no content. Open: is the gap experienced in-story, or does she know
 the owner removed it (or per character)?
+
+**Owner's answer on forgetting:** the gap is experienced in the story. A character may comment that she doesn't
+remember something, and others who were there may remember it and comment too ("life-like"). Knowing the owner
+removed it is a backstage-only matter.
