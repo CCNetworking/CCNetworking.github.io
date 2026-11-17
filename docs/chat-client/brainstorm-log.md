@@ -207,3 +207,10 @@ removed it is a backstage-only matter.
 - Character-only channels are read-only with a "Join in" button and a review of memories saved from them.
 
 Mockup: https://claude.ai/artifact/MsT4v5TWC4WhHpkuJPBkyG (private; stand-in portraits; made-up content).
+
+**Look, further decisions:** the palette is **Garnet**, with **large portraits**.
+
+**Multiple servers (owner's idea):** a "general ecosystem" server for everyday life, plus separate servers for
+specific scenarios. Foundation note: channels, memories and the calendar belong to a server (`server_id` from the
+start of project 1), and a character can belong to several servers. The UI starts with one server. Open: whether a
+scenario server is a sealed sandbox or counts in the characters' lives (memory flowing between servers).
