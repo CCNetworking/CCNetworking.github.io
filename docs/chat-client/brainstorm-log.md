@@ -139,3 +139,29 @@ get a full design now; 3 to 9 are designed when reached.
 - Passkey (WebAuthn) login, auto-lock after idle, quick-hide screen for the app switcher.
 - Accessibility pass: font size, screen reader, keyboard shortcuts.
 - Export a chat or chapters as Markdown; later, the novel path.
+
+### What the owner wants most from the day-2 list
+
+The theme is an **artificial ecosystem of characters the owner creates**: they have presence, make images for
+themselves and each other, and live a shared calendar.
+
+- **Presence and feel: huge.** Avatars, status, and characters generating images for themselves and for each other.
+- **Catching up:** the "while you were away" digest, with the owner able to **edit and curate what is committed
+  to memory** from what happened in their absence.
+- **Continue button:** yes.
+- **Scene HUD:** interesting. New idea from it: a **visual checklist of objects, wardrobe items and so on**,
+  and an **interactive builder for image-generation prompts** from those items.
+- **Character quality tools (drift check, compare):** "perfect".
+- **In-world calendar:** really fun.
+
+### Foundation notes (so projects 1 and 2 do not block these)
+
+- Messages have an author type (user, character, system) and can carry image attachments from any author,
+  so characters can send images to each other.
+- Per-character runtime state (presence, mood) is a first-class record, even if empty at first.
+- Outfit and worn items in the scene state are references to structured items, not free text, so a wardrobe
+  checklist and a prompt builder can sit on them later.
+- A "continue" action is a normal generation request with no user message.
+- Characters reacting to each other's images needs a vision-capable model: the model question is no longer
+  irrelevant.
+- Memories made from away-time chats arrive as **proposed**, pending the owner's curation.
